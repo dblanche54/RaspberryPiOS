@@ -1,0 +1,1 @@
+2/14/2014: The kernel image compiles without any errors. However, when placed on the SD card it only boots to the rainbow screen. Most likely an issue with the inline assembly in source/print.c. Try to get the assembly functions working properly from the C programs.
