@@ -1,0 +1,24 @@
+#include "print.h"
+
+void* memcpy(void* dest, const void* source, unsigned int size)
+{
+	unsigned int i;
+
+	if(dest < source)
+	{
+		for(i = 0; i < size; i++)
+		{
+			((char*) dest)[i] = ((char*) source)[i];
+		}
+	}
+	else
+	{
+		for(i = size - 1; i >= 0; i--)
+		{
+			((char*) dest)[i] = ((char*) source)[i];
+		}
+	}
+	
+	return dest;
+}
+
