@@ -3,6 +3,7 @@
 #include "print.h"
 #include "leds.h"
 #include "timer.h"
+#include "tostring.h"
 
 int main(void)
 {
@@ -11,9 +12,9 @@ int main(void)
 	char promptMessage[] = "Please enter a command: ";
 
 	/* Preparing the screen to print */
-	SetGraphicsAddress(InitialiseFrameBuffer(1024,768,16));
-	
-	/* Printing to screen */
+	SetGraphicsAddress(InitialiseFrameBuffer(1024, 768, 16));
+
+	/* Printing opening message / prompt */
 	DrawString(greetingMessage, 31, 0, 0);
 	DrawString(promptMessage, 24, 0, 16);
 
