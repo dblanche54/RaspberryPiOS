@@ -34,6 +34,7 @@ OBJECTS := $(patsubst $(SOURCE)%.s,$(BUILD)%.o,$(wildcard $(SOURCE)*.s))
 OBJECTS += $(BUILD)main.o
 OBJECTS += $(BUILD)leds.o
 OBJECTS += $(BUILD)memcpy.o
+OBJECTS += $(BUILD)tostring.o
 
 # Rule to make everything.
 all: $(TARGET) $(LIST)
@@ -65,6 +66,9 @@ $(BUILD)leds.o: $(SOURCE)leds.c
 
 $(BUILD)memcpy.o: $(SOURCE)memcpy.c
 	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)memcpy.c -o $(BUILD)memcpy.o
+
+$(BUILD)tostring.o: $(SOURCE)tostring.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)tostring.c -o $(BUILD)tostring.o
 
 $(BUILD):
 	mkdir $@

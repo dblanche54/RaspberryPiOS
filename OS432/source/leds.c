@@ -1,6 +1,7 @@
 /* Methods to manipulate the pi's LED's */
 
 #include "timer.h"
+#include "leds.h"
 
 /* Turns the ACT LED on */
 void ledon()
