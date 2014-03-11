@@ -1,5 +1,8 @@
 /* Methods related to printing to the screen */
 
+#ifndef _PRINT_H_
+#define _PRINT_H_
+
 /* This structure is filled out by GPU */
 struct FrameBuferDescription 
 {
@@ -26,3 +29,8 @@ unsigned int DrawCharacter(char character, unsigned int x, unsigned int y);
 
 /* Draws a string at a given x and y coordinate */
 void DrawString(char* string, unsigned int length, unsigned int x, unsigned int y);
+
+/* Moves the frame buffer up one row */
+void newRowOnScreen(struct FrameBuferDescription *bufDesc);
+
+#endif
