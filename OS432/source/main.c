@@ -14,20 +14,36 @@ int main(void)
 	char letter;
 	int x = 0;
 	int y = 32;
-
+	int r;
+	
 	/* Preparing the screen to print */
-	SetGraphicsAddress(InitialiseFrameBuffer(1024, 768, 16));
+	struct FrameBuferDescription *bufDesc = InitialiseFrameBuffer(1024, 768, 16);
+	SetGraphicsAddress(bufDesc);
+
+
+	/* Trying to communicate with a keyboard */
+	ledon();
+	UsbInitialise();
+	
+	r = KeyboardCount();
+
+	while(r==0)
+	{
+		DrawString("No Keyboard Detected", 20, 0,0);
+		UsbCheckForChange();
+		r = KeyboardCount();
+	}
+	clearScreen(bufDesc);
+	ledoff();
 
 	/* Printing opening message / prompt */
 	DrawString(greetingMessage, 31, 0, 0);
 	DrawString(promptMessage, 24, 0, 16);
-
-	/* Setting up the keyboard */
-	while(UsbInitialise() != 0);
-
+	
 	/* Getting / printing keyboard input to screen */
 	while(1)
 	{
+	  
 		KeyboardUpdate();
 		letter = KeyboardGetChar();
 		if(letter != 0 && letter >= 0 && letter <= 127)
@@ -36,6 +52,18 @@ int main(void)
 			{
 				x = 0;
 				y += 16;
+			}
+			else if(letter == '*')
+			{
+				break;
+			}
+			else if(letter == '-')
+			{
+				ledoff();
+			}
+			else if(letter == '+')
+			{
+				ledon();
 			}
 			else
 			{
@@ -49,13 +77,12 @@ int main(void)
 			}
 			if(y >= 768)
 			{
-				break;
+				newRowOnScreen(bufDesc);
+				x = 0;
+				y -= 16;
 			}
 		}
 	}
-
-	/* Infinite blinking */
-	ledblink();
 
 	return 0;
 }

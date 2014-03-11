@@ -35,6 +35,7 @@ OBJECTS += $(BUILD)main.o
 OBJECTS += $(BUILD)leds.o
 OBJECTS += $(BUILD)memcpy.o
 OBJECTS += $(BUILD)tostring.o
+OBJECTS += $(BUILD)print.o
 
 # Rule to make everything.
 all: $(TARGET) $(LIST)
@@ -69,6 +70,9 @@ $(BUILD)memcpy.o: $(SOURCE)memcpy.c
 
 $(BUILD)tostring.o: $(SOURCE)tostring.c
 	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)tostring.c -o $(BUILD)tostring.o
+
+$(BUILD)print.o: $(SOURCE)print.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)print.c -o $(BUILD)print.o
 
 $(BUILD):
 	mkdir $@

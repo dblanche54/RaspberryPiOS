@@ -1,5 +1,8 @@
 /* Method to manipulate the pi's LED's */
 
+#ifndef _LEDS_H_
+#define _LEDS_H_
+
 /* Sets the function of a pin */
 void SetGpioFunction(unsigned int gpioRegister, unsigned int function);
 
@@ -14,3 +17,5 @@ void ledoff();
 
 /* Blinks the ACT LED. WARNING: WILL NOT RETURN (INFINITE LOOP) */
 void ledblink();
+
+#endif
