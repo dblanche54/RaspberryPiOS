@@ -36,6 +36,9 @@ OBJECTS += $(BUILD)leds.o
 OBJECTS += $(BUILD)memcpy.o
 OBJECTS += $(BUILD)tostring.o
 OBJECTS += $(BUILD)print.o
+OBJECTS += $(BUILD)memory.o
+OBJECTS += $(BUILD)process.o
+OBJECTS += $(BUILD)scheduler.o
 
 # Rule to make everything.
 all: $(TARGET) $(LIST)
@@ -73,6 +76,15 @@ $(BUILD)tostring.o: $(SOURCE)tostring.c
 
 $(BUILD)print.o: $(SOURCE)print.c
 	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)print.c -o $(BUILD)print.o
+
+$(BUILD)memory.o: $(SOURCE)memory.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)memory.c -o $(BUILD)memory.o
+
+$(BUILD)process.o: $(SOURCE)process.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)process.c -o $(BUILD)process.o
+
+$(BUILD)scheduler.o: $(SOURCE)scheduler.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)scheduler.c -o $(BUILD)scheduler.o
 
 $(BUILD):
 	mkdir $@
