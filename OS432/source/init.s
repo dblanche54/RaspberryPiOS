@@ -8,6 +8,6 @@ _start:
 * Branch to the main function defined in main.c.
 */
 
-mov sp,#0x8000
-
+mov sp, #0x8000
 b main
+b master_process
