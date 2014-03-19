@@ -9,7 +9,7 @@
 #define _MEMORY_H_
 
 /* Starting address and size of the kernel heap region. */
-#define KERNEL_HEAP_START 16777216
+#define KERNEL_HEAP_START 1048576
 #define KERNEL_HEAP_SIZE 268435456
 /* Starting address of the kernel stack. */
 #define KERNEL_STACK_START 32768
@@ -64,21 +64,5 @@ void memory_deallocator(heap* h, void* address);
  * Initialize the kernel heap.
  */
 void memory_init();
-
-#ifdef _DEBUG_
-
-struct debug_heap_info
-{
-	unsigned int number_of_nodes;
-	void* starting_address;
-	unsigned int starting_size;
-};
-
-/**
- * Return kernel heap info.
- */
-struct debug_heap_info get_kernel_info();
-
-#endif
 
 #endif

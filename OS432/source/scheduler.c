@@ -5,8 +5,11 @@
  * Date: March 14, 2014
  */
 
+#include "cpu_context.h"
 #include "process.h"
 #include "scheduler.h"
+
+#define NULL ((void*) 0)
 
 void schedule()
 {
@@ -33,12 +36,5 @@ void schedule()
 		SCHEDULE_FIRST_FLAG = 0;
 	}
 	
-	/* Restore context of current process. */
-	asm volatile
-	(
-		"mov sp, %1\n\t"
-		"mov pc, %2\n\t"
-		:
-		: current->stack_pointer, current->program_counter
-	);
+	restore_context();
 }

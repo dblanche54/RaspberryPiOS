@@ -13,14 +13,8 @@
 #include "memory.h"
 
 /* Default heap and stack sizes for a user process. */
-#define USER_HEAP_SIZE 16777216
-#define USER_STACK_SIZE 4194304
-/* Default start address for the stack of a user process (virtual). */
-#define USER_STACK_START 1073741824
-#define USER_STACK_END (USER_STACK_START - USER_STACK_SIZE)
-/* User heap start is the same as kernel heap start, but virtual. */
-#define USER_HEAP_START KERNEL_HEAP_START
-#define USER_HEAP_END (USER_HEAP_START + USER_HEAP_SIZE)
+#define USER_HEAP_SIZE 65536
+#define USER_STACK_SIZE 65536
 
 /* Process state. */
 enum process_state
@@ -31,7 +25,21 @@ enum process_state
 	BLOCKED_RECEIVE
 };
 
-struct process_list;
+struct process;
+
+/* A node for a list of processes. */
+struct process_node
+{
+	struct process* proc;
+	struct process_node* next;
+};
+
+/* A list of processes. */
+struct process_list
+{
+	struct process_node* head;
+	struct process_node* tail;
+};
 
 /* A process descriptor. */
 struct process
@@ -54,20 +62,6 @@ struct process
 	struct ipc_msg_list message_queue;
 	/* Structure for the reply. */
 	struct ipc_node reply;
-};
-
-/* A node for a list of processes. */
-struct process_node
-{
-	struct process* proc;
-	struct process_node* next;
-};
-
-/* A list of processes. */
-struct process_list
-{
-	struct process_node* head;
-	struct process_node* tail;
 };
 
 /* The active process. */

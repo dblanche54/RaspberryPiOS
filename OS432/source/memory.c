@@ -8,6 +8,8 @@
 #include "memory.h"
 #include "process.h"
 
+#define NULL ((void*) 0)
+
 void* kmalloc(unsigned int size)
 {
 	return memory_allocator(&kernel_heap, size);
@@ -33,6 +35,7 @@ void* memory_allocator(heap* h, unsigned int size)
 		{
 			address = node->address;
 			*((unsigned int*) address) = size2;
+			node->address = (void*) (((char*) node->address) + size2);
 			node->size = node->size - size2;
 			
 			if(node->size == 0)
@@ -117,7 +120,7 @@ void memory_deallocator(heap* h, void* address)
 			else
 			{
 				struct heap_node* new = (struct heap_node*)
-					kmalloc(sizeof(heap_node));
+					kmalloc(sizeof(struct heap_node));
 				if(new != NULL)
 				{
 					new->address = address;
@@ -138,7 +141,7 @@ void memory_deallocator(heap* h, void* address)
 		else
 		{
 			struct heap_node* new = (struct heap_node*)
-				kmalloc(sizeof(heap_node));
+				kmalloc(sizeof(struct heap_node));
 			if(new != NULL)
 			{
 				new->address = node->address;
@@ -158,25 +161,3 @@ void memory_init()
 	kernel_heap.size = KERNEL_HEAP_SIZE;
 	kernel_heap.next = NULL;
 }
-
-#ifdef _DEBUG_
-
-struct debug_heap_info get_kernel_info()
-{
-	struct debug_heap_info ret;
-	struct heap_node* next = &kernel_heap;
-	
-	ret.starting_address = kernel_heap.address;
-	ret.starting_size = kernel_heap.size;
-	ret.number_of_nodes = 0;
-	
-	while(next != NULL)
-	{
-		ret.number_of_nodes++;
-		next = next->next;
-	}
-	
-	return ret;
-}
-
-#endif
