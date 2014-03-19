@@ -39,6 +39,7 @@ OBJECTS += $(BUILD)print.o
 OBJECTS += $(BUILD)memory.o
 OBJECTS += $(BUILD)process.o
 OBJECTS += $(BUILD)scheduler.o
+OBJECTS += $(BUILD)master_process.o
 
 # Rule to make everything.
 all: $(TARGET) $(LIST)
@@ -85,6 +86,9 @@ $(BUILD)process.o: $(SOURCE)process.c
 
 $(BUILD)scheduler.o: $(SOURCE)scheduler.c
 	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)scheduler.c -o $(BUILD)scheduler.o
+
+$(BUILD)master_process.o: $(SOURCE)master_process.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)master_process.c -o $(BUILD)master_process.o
 
 $(BUILD):
 	mkdir $@

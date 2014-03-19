@@ -8,6 +8,9 @@
 #ifndef _SCHEDULER_H_
 #define _SCHEDULER_H_
 
+/* Flag to indicate that schedule has not been called at all yet. */
+int SCHEDULE_FIRST_FLAG;
+
 /**
  * Schedule and switch to an active process.
  * Note: this routine does not return. If a process blocks itself, then calls

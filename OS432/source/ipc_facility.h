@@ -25,7 +25,7 @@ struct ipc_node
 struct ipc_msg_list
 {
 	struct ipc_node* head;
-	struct ipc_node* list;
+	struct ipc_node* tail;
 };
 
 #endif
