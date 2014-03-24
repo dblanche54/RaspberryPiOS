@@ -1,7 +1,7 @@
 /**
  * This file contains the process-related routines.
  * 
- * Author: Omar Zarifi
+ * AuthbleTimer();or: Omar Zarifi
  * Date: March 11, 2014
  */
 
@@ -44,6 +44,7 @@ void processes_init()
 		//"and %0, r0, r1 \n"
 		: "=r" (cpsr)
 	);
+	//cpsr = cpsr & ~(0x80);
 	*((unsigned int*) master->stack_pointer) = cpsr;
 	toBinString((void*) cpsr, dog);
 	DrawString(dog, 32, 50, 82);
