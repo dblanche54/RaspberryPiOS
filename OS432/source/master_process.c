@@ -8,27 +8,13 @@
 #include "print.h"
 #include "tostring.h"
 
+int dog = 0;
+
 void master_process()
 {
-	unsigned int cpsr;
-	char dog[32];
-	
-	/* The messages to be printed */
-	char greetingMessage[] = "Welcome to our Operating System";
-	char promptMessage[] = "Please enter a command: ";
-	
-	/* Printing opening message / prompt */
-	DrawString(greetingMessage, 31, 0, 0);
-	DrawString(promptMessage, 24, 0, 16);
-	
-	asm volatile
-	(
-		"mrs %0, cpsr \n"
-		: "=r" (cpsr)
-	);
-	toBinString((void*) cpsr, dog);
-	DrawString(dog, 32, 0, 32);
-	
+	char message[] = "Master Process";
+	DrawString(message, 14, 0, dog);
+	dog = dog + 16;
 	while(1)
 	{
 		

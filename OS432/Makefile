@@ -40,6 +40,8 @@ OBJECTS += $(BUILD)memory.o
 OBJECTS += $(BUILD)process.o
 OBJECTS += $(BUILD)scheduler.o
 OBJECTS += $(BUILD)master_process.o
+OBJECTS += $(BUILD)interrupts.o
+#OBJECTS += $(BUILD)int_handlers.o
 
 # Rule to make everything.
 all: $(TARGET) $(LIST)
@@ -89,6 +91,12 @@ $(BUILD)scheduler.o: $(SOURCE)scheduler.c
 
 $(BUILD)master_process.o: $(SOURCE)master_process.c
 	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)master_process.c -o $(BUILD)master_process.o
+
+$(BUILD)interrupts.o: $(SOURCE)interrupts.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)interrupts.c -o $(BUILD)interrupts.o
+
+#$(BUILD)int_handlers.o: $(SOURCE)int_handlers.c
+#	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)int_handlers.c -o $(BUILD)int_handlers.o
 
 $(BUILD):
 	mkdir $@
