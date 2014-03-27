@@ -13,6 +13,7 @@
 #include "tostring.h"
 #include "interrupts.h"
 #include "timer.h"
+#include "scheduler.h"
 
 void idt_init()
 {
@@ -35,29 +36,12 @@ void svc_handler()
 {
 }
 
-extern unsigned long long sys_time;
-
 void irq_handler()
 {
-	char message[] = "IN IRQ";
-	char hex[10];
-	unsigned int time;
-	asm volatile
-	(
-		"mov sp, #0x8000 \n\t"
-	);
-	sys_time = GetTimeStamp() - sys_time;
-	time = (unsigned int) sys_time % 0xFFFFFFFF;
-	toHexString((void*) time, hex);
-	DrawString(hex, 10, 200, 200);
-
+	save_context();
+	current->program_counter = (void*) (((unsigned int) current->program_counter) - 4);
 	disableTimer();
-	DrawString(message, 6, 150, 150);
-
-	toHexString((void *)getTimerValue(), hex);
-	DrawString(hex, 10, 175, 175);
-
-	ackTimerInterrupt();	
-	
+	ackTimerInterrupt();
 	enableTimer();
+	schedule();
 }

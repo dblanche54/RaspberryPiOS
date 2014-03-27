@@ -3,6 +3,8 @@
 #ifndef _PRINT_H_
 #define _PRINT_H_
 
+struct FrameBuferDescription* bufDesc;
+
 /* This structure is filled out by GPU */
 struct FrameBuferDescription 
 {
@@ -32,5 +34,8 @@ void DrawString(char* string, unsigned int length, unsigned int x, unsigned int 
 
 /* Moves the frame buffer up one row */
 void newRowOnScreen(struct FrameBuferDescription *bufDesc);
+
+/* Clears the screen */
+void clearScreen(struct FrameBuferDescription *bufDesc);
 
 #endif

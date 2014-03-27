@@ -27,8 +27,10 @@ void processes_init()
 	
 	/* Create the master process. */
 	struct process* master = (struct process*) kmalloc(sizeof(struct process));
+	/*
 	toHexString((void*) master, hex);
 	DrawString(hex, 10, 50, 50);
+	*/
 	master->pid = 1;
 	master->ppid = 0;
 	master->program_counter = (void*) ((unsigned int) (0x8008));
@@ -44,8 +46,11 @@ void processes_init()
 		//"and %0, r0, r1 \n"
 		: "=r" (cpsr)
 	);
-	//cpsr = cpsr & ~(0x80);
+	cpsr = cpsr & ~(0x80);
+	cpsr = cpsr | 0xF;
 	*((unsigned int*) master->stack_pointer) = cpsr;
+	
+	/*
 	toBinString((void*) cpsr, dog);
 	DrawString(dog, 32, 50, 82);
 	toHexString(master->stack_pointer, hex);
@@ -54,6 +59,7 @@ void processes_init()
 	DrawString(hex, 10, 50, 98);
 	toHexString((unsigned int) master->program_counter, hex);
 	DrawString(hex, 10, 50, 114);
+	*/
 	master->process_heap.next = NULL;
 	master->state = ACTIVE;
 	master->children.head = NULL;
@@ -70,8 +76,10 @@ void processes_init()
 	processes.head = node;
 	processes.tail = node;
 	
+/*	
 	toHexString((unsigned int) master->program_counter, hex);
 	DrawString(hex, 10, 50, 130);
+*/
 	
 	/* The master process will now take control. */
 	SCHEDULE_FIRST_FLAG = 1;
