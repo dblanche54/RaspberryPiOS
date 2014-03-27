@@ -24,34 +24,46 @@
 #define save_context() \
 	asm volatile \
 	( \
-		"mov sp, %0 \n" \
-		"push {r10-r12} \n" \
-		"mov r10, #0x1F \n" \
-		"mrs r11, cpsr \n" \
-		"and r12, r11, r10 \n" \
-		"mvn r10, r10 \n" \
-		"orr r12, r12, r10 \n" \
-		"mvn r10, r10 \n" \
-		"orr r11, r11, r10 \n" \
-		"msr cpsr, r11 \n" \
-		"push {lr} \n" \
-		"push {r0-r9} \n" \
-		"mov r0, sp \n" \
-		"and r11, r11, r12 \n" \
-		"msr cpsr, r11 \n" \
-		"pop {r1-r3} \n" \
-		"mrs r4, spsr \n" \
-		"mov r5, sp \n" \
-		"mov sp, r0 \n" \
-		"push {r1-r4} \n" \
-		"mov r0, sp \n" \
-		"mov r1, lr \n" \
-		"mov sp, r5 \n" \
-		"mov %1, r0 \n" \
-		"mov %2, r1 \n" \
-		: \
-		: "i" (KERNEL_STACK_START), "X" (current->stack_pointer), \
-			"X" (current->program_counter) \
+		"mov sp, %[c] \n\t" \
+		"push {r12} \n\t" \
+		"push {r11} \n\t" \
+		"push {r10} \n\t" \
+		"mov r10, #0x1F \n\t" \
+		"mrs r11, cpsr \n\t" \
+		"mov r12, r11 \n\t" \
+		"orr r11, r11, r10 \n\t" \
+		"msr cpsr, r11 \n\t" \
+		"push {lr} \n\t" \
+		"push {r0} \n\t" \
+		"push {r1} \n\t" \
+		"push {r2} \n\t" \
+		"push {r3} \n\t" \
+		"push {r4} \n\t" \
+		"push {r5} \n\t" \
+		"push {r6} \n\t" \
+		"push {r7} \n\t" \
+		"push {r8} \n\t" \
+		"push {r9} \n\t" \
+		"mov r0, sp \n\t" \
+		"msr cpsr, r12 \n\t" \
+		"pop {r1} \n\t" \
+		"pop {r2} \n\t" \
+		"pop {r3} \n\t" \
+		"mrs r4, spsr \n\t" \
+		"mov r5, sp \n\t" \
+		"mov sp, r0 \n\t" \
+		"push {r1} \n\t" \
+		"push {r2} \n\t" \
+		"push {r3} \n\t" \
+		"push {r4} \n\t" \
+		"mov r0, sp \n\t" \
+		"mov r1, lr \n\t" \
+		"mov sp, r5 \n\t" \
+		"mov %[a], r0 \n\t" \
+		"mov %[b], r1 \n\t" \
+		: [a] "=r" (current->stack_pointer), \
+			[b] "=r" (current->program_counter) \
+		: [c] "I" (KERNEL_STACK_START) \
 	);
 
 /**
@@ -62,35 +74,49 @@
 #define restore_context() \
 	asm volatile \
 	( \
-		"mov lr, %0 \n" \
-		"mov r0, sp \n" \
-		"mov r10, #0x1F \n" \
-		"mrs r11, cpsr \n" \
-		"mov r12, r11 \n" \
-		"orr r11, r11, r10 \n" \
-		"msr cpsr, r11 \n" \
-		"mov sp, r0 \n" \
-		"mov r1, %1 \n" \
-		"mov sp, r1 \n" \
-		"pop {r5} \n" \
-		"pop {r6-r9} \n" \
-		"mov r1, sp \n" \
-		"mov sp, r0 \n" \
-		"push {r6-r9} \n" \
-		"push {r5} \n" \
-		"mov r9, sp \n" \
-		"mov sp, r1 \n" \
-		"pop {r0-r8} \n" \
-		"pop {lr} \n" \
-		"and r11, r11, r12 \n" \
-		"msr cpsr, r11 \n" \
-		"mov sp, r9 \n" \
-		"pop {r9} \n" \
-		"msr spsr, r9 \n" \
-		"pop {r9-r12} \n" \
-		"movs pc, lr \n" \
+		"mov lr, %0 \n\t" \
+		"mov r0, sp \n\t" \
+		"mov r10, #0x1F \n\t" \
+		"mrs r11, cpsr \n\t" \
+		"mov r12, r11 \n\t" \
+		"orr r11, r11, r10 \n\t" \
+		"msr cpsr, r11 \n\t" \
+		"mov sp, %1 \n\t" \
+		"pop {r5} \n\t" \
+		"pop {r6} \n\t" \
+		"pop {r7} \n\t" \
+		"pop {r8} \n\t" \
+		"pop {r9} \n\t" \
+		"mov r1, sp \n\t" \
+		"mov sp, r0 \n\t" \
+		"push {r9} \n\t" \
+		"push {r8} \n\t" \
+		"push {r7} \n\t" \
+		"push {r6} \n\t" \
+		"push {r5} \n\t" \
+		"mov r9, sp \n\t" \
+		"mov sp, r1 \n\t" \
+		"pop {r8} \n\t" \
+		"pop {r7} \n\t" \
+		"pop {r6} \n\t" \
+		"pop {r5} \n\t" \
+		"pop {r4} \n\t" \
+		"pop {r3} \n\t" \
+		"pop {r2} \n\t" \
+		"pop {r1} \n\t" \
+		"pop {r0} \n\t" \
+		"pop {lr} \n\t" \
+		"msr cpsr, r12 \n\t" \
+		"mov sp, r9 \n\t" \
+		"pop {r9} \n\t" \
+		"msr spsr, r9 \n\t" \
+		"pop {r12} \n\t" \
+		"pop {r11} \n\t" \
+		"pop {r10} \n\t" \
+		"pop {r9} \n\t" \
+		"movs pc, lr \n\t" \
 		: \
-		: "X" (current->program_counter), "X" (current->stack_pointer) \
+		: "r" (current->program_counter), "r" (current->stack_pointer) \
 	);
 
 #endif
