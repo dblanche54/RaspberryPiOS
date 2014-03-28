@@ -9,9 +9,14 @@
 #ifndef _IO_CONFIG_H_
 #define _IO_CONFIG_H_
 
+#include "print.h"
+
 /* Output resolution. */
-#define H_RESOLUTION 1280
-#define V_RESOLUTION 720
+#define H_RESOLUTION 1024
+#define V_RESOLUTION 768
+
+/* Output bits per pixel. */
+#define BITS_PER_PIXEL 16
 
 /* Character size. */
 #define H_CHAR 8
@@ -23,5 +28,23 @@
 
 /* Maximum size of an input/output string. */
 #define MAX_IO_STRING_SIZE 256
+
+/* Number of lines to leave when contents of the screen must be moved up. */
+#define REFRESH_LINE 20
+
+/**
+ * Initialize the input device (keyboard).
+ */
+void input_init();
+
+/**
+ * Initialize the output device (monitor).
+ */
+void output_init();
+
+/**
+ * Framebuffer descriptor structure.
+ */
+void* framebuffer;
 
 #endif

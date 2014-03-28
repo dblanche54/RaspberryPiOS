@@ -1,27 +1,15 @@
 /* Main C method, jumped to from init.s */
 
+#include "int_handlers.h"
+#include "io_init.h"
 #include "memory.h"
 #include "process.h"
-#include "interrupts.h"
-#include "tostring.h"
-#include "print.h"
-#include "timer.h"
-#include "int_handlers.h"
 
-int main(void)
+void main()
 {
-	bufDesc = (struct FrameBuferDescription*) 
-		InitialiseFrameBuffer(1024, 768, 16);
-	SetGraphicsAddress(bufDesc);
-
+	input_init();
+	output_init();
 	memory_init();
 	idt_init();
-	loadPreDivValue(100);
-	enableTimerInterrupts();
-	loadTimerValue(0xFFFFFFFF);
-	enableTimer();
-
 	processes_init();
-
-	return 0;
 }

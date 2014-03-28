@@ -40,5 +40,5 @@ mov r0, r0				/* 0x8054 */
 mov r0, r0				/* 0x8058 */
 b irq_handler			/* 0x805C */
 mov r0, r0				/* 0x8060 */
-mov r0, r0				/* 0x8064 */
-b new_process				/* 0x8068 */
+b console_process		/* 0x8064 */
+b new_process			/* 0x8068 */
