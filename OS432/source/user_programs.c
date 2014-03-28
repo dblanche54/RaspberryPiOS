@@ -24,9 +24,12 @@ unsigned int pidTalk(){
 	int *recievedSize;
 	
 	childPid = osc_create_process(pidTalkChild);
-	
+	osc_print_string(sending, 16);
 	osc_send(childPid, (void*)message, 15, recievedMessage, recievedSize);
+	osc_print_string(recieved, 17);
+	osc_print_string(recievedMessage, recievedSize);
 
+	return 0;
 }
 
 unsigned int pidTalkChild(){
@@ -38,8 +41,12 @@ unsigned int pidTalkChild(){
 	int *recievedSize;
 	
 	parentPid = osc_getppid();
-	
+	osc_print_string(sending, 16);
 	osc_recieve(parentPid, recievedMessage, recievedSize);
+	osc_print_string(recieved, 17);
+	osc_print_string(recievedMessage, recievedSize);
 	osc_reply(parentPid, message, 14)
+	
+	return 0;
 
 }
