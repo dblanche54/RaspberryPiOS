@@ -61,24 +61,11 @@ unsigned long long internal_gettime(unsigned int a0, unsigned int a1,
 	unsigned int a2, unsigned int a3, unsigned int a4);
 
 unsigned long long (*syscall_functions[NUM_SYSCALLS])(unsigned int,
-	unsigned int, unsigned int, unsigned int, unsigned int) =
-	{
-		internal_dummy_syscall,
-		internal_malloc,
-		internal_free,
-		internal_send,
-		internal_get_reply,
-		internal_wait_for_send,
-		internal_receive,
-		internal_reply,
-		internal_getpid,
-		internal_getppid,
-		internal_create_process,
-		internal_waitpid,
-		internal_exit,
-		internal_sleep,
-		internal_yield,
-		internal_gettime
-	};
+	unsigned int, unsigned int, unsigned int, unsigned int);
+
+/**
+ * Initialize the array of internal system call functions.
+ */
+void syscalls_init();
 
 #endif

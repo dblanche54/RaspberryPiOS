@@ -60,14 +60,15 @@ int strcmp(const char* string1, const char* string2)
 
 void master_process()
 {
-	int *maxsize;
-	*maxsize = 32;
+	//int *maxsize;
+	//*maxsize = 32;
+	DrawString(welcomemsg, 17, 100, 0);
 	osc_print_line(welcomemsg, 17);
 
 	while(1)
 	{
-		osc_print_line(prompt, 24);
-		osc_get_string(command, maxsize);
+		//osc_print_line(prompt, 24);
+		/*osc_get_string(command, maxsize);
 		if(strcmp(command, blinkcmd) == 0)
 		{
 			internal_create_process(blinkled, 0, 0, 0, 0);
@@ -79,6 +80,6 @@ void master_process()
 		else
 		{
 			osc_print_line(invalidcmd, 27);
-		}
+		}*/
 	}
 }

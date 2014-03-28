@@ -48,6 +48,7 @@ OBJECTS += $(BUILD)memory_syscalls.o
 OBJECTS += $(BUILD)misc_syscalls.o
 OBJECTS += $(BUILD)process_syscalls.o
 OBJECTS += $(BUILD)user_syscalls.o
+OBJECTS += $(BUILD)syscalls_init.o
 
 # Rule to make everything.
 all: $(TARGET) $(LIST)
@@ -121,6 +122,10 @@ $(BUILD)process_syscalls.o: $(SOURCE)process_syscalls.c
 
 $(BUILD)user_syscalls.o: $(SOURCE)user_syscalls.c
 	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)user_syscalls.c -o $(BUILD)user_syscalls.o
+
+$(BUILD)syscalls_init.o: $(SOURCE)syscalls_init.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)syscalls_init.c -o $(BUILD)syscalls_init.o
+
 
 $(BUILD):
 	mkdir $@

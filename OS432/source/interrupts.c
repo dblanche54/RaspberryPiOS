@@ -59,3 +59,14 @@ void loadTimerValue(unsigned int time)
 	unsigned int *tmp = (unsigned int *)TIMERLDADDR;
 	*tmp = time;
 }
+
+/**
+ * Initialize timer interrupts.
+ */
+void timer_interrupt_init()
+{
+	loadPreDivValue(PREDIVISOR);
+	enableTimerInterrupts();
+	loadTimerValue(TIMER_VALUE);
+	enableTimer();
+}

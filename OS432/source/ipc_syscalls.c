@@ -9,6 +9,10 @@
 #include "ipc_facility.h"
 #include "memcpy.h"
 #include "process.h"
+#include "print.h"
+
+#define NULL ((void*) 0)
+char msg2[] = "SENT MSG";
 
 /**
  * a0 is the pid of the process to send to. a1 is the pointer to the data to
@@ -22,7 +26,7 @@ unsigned long long internal_send(unsigned int a0, unsigned int a1,
 	struct process* partner = get_by_pid(a0);
 	struct ipc_node* new_node =
 		(struct ipc_node*) kmalloc(sizeof(struct ipc_node));
-	
+	DrawString(msg2, 8, 250, 250);
 	if(new_node == NULL)
 	{
 		return IPC_MEMORY_ERROR;
@@ -62,6 +66,7 @@ unsigned long long internal_send(unsigned int a0, unsigned int a1,
 	{
 		partner->state = ACTIVE;
 	}
+	DrawString(msg2, 8, 200, 400);
 	
 	if(a3 == 1)
 	{
@@ -96,6 +101,10 @@ unsigned long long internal_get_reply(unsigned int a0, unsigned int a1,
 	return 0;
 }
 
+char msg0[] = "WAITING FOR MSG";
+char msg1[] = "THERE IS AN MSG";
+char msg3[] = "WAIT NOT NEEDED";
+
 /**
  * All arguments are unused.
  */
@@ -104,10 +113,11 @@ unsigned long long internal_wait_for_send(unsigned int a0, unsigned int a1,
 {
 	if(current->message_queue.head == NULL)
 	{
+		DrawString(msg0, 15, 200, 200);
 		current->state = BLOCKED_RECEIVE;
 		schedule();
 	}
-	
+	DrawString(msg3, 15, 400, 400);
 	return 0;
 }
 
@@ -128,6 +138,7 @@ unsigned long long internal_receive(unsigned int a0, unsigned int a1,
 	{
 		current->message_queue.tail = node->next;
 	}
+	DrawString(msg1, 15, 300, 300);
 	
 	*pid = node->sender;
 	if(node->size < *size)
