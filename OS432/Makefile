@@ -41,7 +41,13 @@ OBJECTS += $(BUILD)process.o
 OBJECTS += $(BUILD)scheduler.o
 OBJECTS += $(BUILD)master_process.o
 OBJECTS += $(BUILD)interrupts.o
-#OBJECTS += $(BUILD)int_handlers.o
+OBJECTS += $(BUILD)console_proc.o
+OBJECTS += $(BUILD)io_init.o
+OBJECTS += $(BUILD)ipc_syscalls.o
+OBJECTS += $(BUILD)memory_syscalls.o
+OBJECTS += $(BUILD)misc_syscalls.o
+OBJECTS += $(BUILD)process_syscalls.o
+OBJECTS += $(BUILD)user_syscalls.o
 
 # Rule to make everything.
 all: $(TARGET) $(LIST)
@@ -95,8 +101,26 @@ $(BUILD)master_process.o: $(SOURCE)master_process.c
 $(BUILD)interrupts.o: $(SOURCE)interrupts.c
 	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)interrupts.c -o $(BUILD)interrupts.o
 
-#$(BUILD)int_handlers.o: $(SOURCE)int_handlers.c
-#	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)int_handlers.c -o $(BUILD)int_handlers.o
+$(BUILD)console_proc.o: $(SOURCE)console_proc.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)console_proc.c -o $(BUILD)console_proc.o
+
+$(BUILD)io_init.o: $(SOURCE)io_init.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)io_init.c -o $(BUILD)io_init.o
+
+$(BUILD)ipc_syscalls.o: $(SOURCE)ipc_syscalls.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)ipc_syscalls.c -o $(BUILD)ipc_syscalls.o
+
+$(BUILD)memory_syscalls.o: $(SOURCE)memory_syscalls.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)memory_syscalls.c -o $(BUILD)memory_syscalls.o
+
+$(BUILD)misc_syscalls.o: $(SOURCE)misc_syscalls.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)misc_syscalls.c -o $(BUILD)misc_syscalls.o
+
+$(BUILD)process_syscalls.o: $(SOURCE)process_syscalls.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)process_syscalls.c -o $(BUILD)process_syscalls.o
+
+$(BUILD)user_syscalls.o: $(SOURCE)user_syscalls.c
+	$(ARMGNU)-gcc -c -I $(SOURCE) $(SOURCE)user_syscalls.c -o $(BUILD)user_syscalls.o
 
 $(BUILD):
 	mkdir $@
