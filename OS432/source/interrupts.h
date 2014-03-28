@@ -11,6 +11,10 @@
 #define TIMERACKREG  (void *)0x2000B40C;
 #define TIMERPREDIV  (void *)0x2000B41C;
 
+/* Constants that determine frequency of clock interrupts. */
+#define PREDIVISOR 100
+#define TIMER_VALUE 0xFFFFFFFF
+
 /* Set the predivider register */
 void loadPreDivValue(unsigned int value);
 
@@ -31,5 +35,10 @@ unsigned int getTimerValue();
 
 /* Load value into timer */
 void loadTimerValue(unsigned int time);
+
+/**
+ * Initialize timer interrupts.
+ */
+void timer_interrupt_init();
 
 #endif

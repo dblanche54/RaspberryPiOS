@@ -29,7 +29,7 @@ void processes_init()
 	master->process_heap.size = USER_HEAP_SIZE;
 	master->stack_pointer = (void*) (((char*) master->process_heap.address)
 		+ USER_HEAP_SIZE + USER_STACK_SIZE - 15 * 4);
-	*((unsigned int*) master->stack_pointer) = USER_CPSR;
+	*((unsigned int*) master->stack_pointer) = USER_CPSR | 0xF;
 	master->process_heap.next = NULL;
 	master->state = ACTIVE;
 	master->children.head = NULL;
@@ -58,7 +58,6 @@ void processes_init()
 	/* Note that the reply field does not need initialization. */
 	
 	/* Initialize the system structures that keep track of processes. */
-	current = master;
 	node = (struct process_node*) kmalloc(sizeof(struct process_node));
 	node->proc = master;
 	processes.head = node;

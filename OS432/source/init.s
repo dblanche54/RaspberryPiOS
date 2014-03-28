@@ -9,7 +9,7 @@ _start:
 */
 
 mov sp, #0x8000			/* 0x8000 */
-b main					/* 0x8004 */
+b initialize			/* 0x8004 */
 b master_process		/* 0x8008 */
 ldr pc, _dummy_reset_handler_address			/* 0x800C */
 ldr pc, _dummy_undefined_handler_address		/* 0x8010 */
@@ -40,5 +40,5 @@ mov r0, r0				/* 0x8054 */
 mov r0, r0				/* 0x8058 */
 b irq_handler			/* 0x805C */
 mov r0, r0				/* 0x8060 */
-b console_process		/* 0x8064 */
+b console_proc			/* 0x8064 */
 b new_process			/* 0x8068 */

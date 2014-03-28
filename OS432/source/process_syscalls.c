@@ -9,6 +9,8 @@
 #include "timer.h"
 #include "user_syscalls.h"
 
+#define NULL ((void*) 0)
+
 unsigned int next_free = 3;
 
 /**
@@ -32,7 +34,7 @@ unsigned long long internal_getppid(unsigned int a0, unsigned int a1,
 /**
  * Return a new usable pid.
  */
-unsigned int get_free_pid();
+unsigned int get_free_pid()
 {
 	next_free = next_free + 1;
 	return next_free - 1;
@@ -69,7 +71,7 @@ unsigned long long internal_create_process(unsigned int a0, unsigned int a1,
 		+ USER_HEAP_SIZE + USER_STACK_SIZE - 15 * 4);
 	*((unsigned int*) n->stack_pointer) = USER_CPSR;
 	/* This puts the function pointer into saved r6. */
-	*((unsigned int*)(((unsigned int) n->stack_pointer) + 28)) = (void*) a0;
+	*((unsigned int*)(((unsigned int) n->stack_pointer) + 28)) = a0;
 	n->process_heap.next = NULL;
 	n->state = ACTIVE;
 	n->children.head = NULL;

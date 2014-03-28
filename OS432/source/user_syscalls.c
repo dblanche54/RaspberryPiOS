@@ -9,6 +9,8 @@
 #include "memcpy.h"
 #include "syscalls.h"
 #include "user_syscalls.h"
+#include "tostring.h"
+#include "print.h"
 
 void* osc_malloc(unsigned int size)
 {
@@ -78,6 +80,8 @@ unsigned int osc_send(unsigned int pid, void* msg, unsigned int size,
 unsigned int osc_async_send(unsigned int pid, void* msg, unsigned int size)
 {
 	unsigned int ret;
+	char out[] = "IN ASYNC";
+	DrawString(out, 8, 700, 700);
 	
 	asm volatile
 	(
@@ -252,13 +256,25 @@ void osc_print_string(char* string, unsigned int size)
 
 void osc_print_line(char* string, unsigned int size)
 {
+	int ret;
+	char out[11];
+	char out2[] = "IN PRINTLINE";
 	struct io_request request;
-	
+	ret = toDecimalString(sizeof(struct io_request), out);
+	DrawString(out, ret, 400, 400);
+	ret = toDecimalString(request.string, out);
+	DrawString(out, ret, 450, 450);
+	ret = toDecimalString(&request.size, out);
+	DrawString(out, ret, 475, 475);
+	DrawString(out2, 12, 500, 500);
 	request.type = OUTPUT_LN;
 	memcpy(request.string, string, size);
+	DrawString(out2, 12, 600, 600);
 	request.size = size;
 	
-	osc_async_send(CONSOLE_PID, &request, sizeof(struct io_request));
+	ret = osc_async_send(CONSOLE_PID, &request, sizeof(struct io_request));
+	ret = toDecimalString(ret, out);
+	DrawString(out, ret, 700, 700);
 }
 
 void osc_get_string(char* string, unsigned int* size)

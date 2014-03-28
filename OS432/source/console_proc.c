@@ -38,23 +38,30 @@ void move_screen_up()
 	}
 }
 
-int console_proc()
+char debug000[] = "CONSOLE";
+char debug001[] = "HERE0";
+
+void console_proc()
 {
 	unsigned int cursorX = 0;	/* In cells, not pixels. */
 	unsigned int cursorY = 0;	/* In cells, not pixels. */
 	unsigned int numCanPrint;
 	unsigned int numPrinted;
 	unsigned int status;
+	unsigned int size;
 	char* string;
 	
 	unsigned int pid;
 	struct io_request data;
+	DrawString(debug000, 7, 100, 100);
 	
 	while(1)
 	{
 		size = sizeof(struct io_request);
+		DrawString(debug001, 5, 180, 100);
 		status = osc_receive(&pid, &data, &size);
 		
+		DrawString(debug001, 5, 180, 116);
 		if(status == 0)
 		{
 			switch(data.type)
@@ -114,6 +121,4 @@ int console_proc()
 			}
 		}
 	}
-	
-	return 0;
 }

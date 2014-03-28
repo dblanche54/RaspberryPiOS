@@ -30,6 +30,6 @@ struct io_request
 	unsigned int size;
 };
 
-int console_proc();
+void console_proc();
 
 #endif
