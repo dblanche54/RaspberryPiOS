@@ -10,19 +10,23 @@
 #ifndef _CONSOLE_PROC_H_
 #define _CONSOLE_PROC_H_
 
+#include "io_config.h"
+
+#define CONSOLE_PID 2
+
 /* Request type; either input or output. */
 enum io_request_type
 {
 	INPUT,
 	OUTPUT,
-	LINE_BREAK
+	OUTPUT_LN
 };
 
 /* A structure to encode a request for service from the console. */
 struct io_request
 {
 	enum io_request_type type;
-	void* address;
+	char string[MAX_IO_STRING_SIZE];
 	unsigned int size;
 };
 

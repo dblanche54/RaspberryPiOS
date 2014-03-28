@@ -13,27 +13,20 @@
 
 void schedule()
 {
-	if(SCHEDULE_FIRST_FLAG == 0)
+	/* Choose the next process. */
+	struct process_node* node = processes.head;
+	while(node != NULL)
 	{
-		/* Choose the next process. */
-		struct process_node* node = processes.head;
-		while(node != NULL)
+		processes.head = node->next;
+		processes.tail->next = node;
+		processes.tail = node;
+		node->next = NULL;
+		
+		if(node->proc->state == ACTIVE)
 		{
-			processes.head = node->next;
-			processes.tail->next = node;
-			processes.tail = node;
-			node->next = NULL;
-			
-			if(node->proc->state == ACTIVE)
-			{
-				current = node->proc;
-				node = NULL;
-			}
+			current = node->proc;
+			node = NULL;
 		}
-	}
-	else
-	{
-		SCHEDULE_FIRST_FLAG = 0;
 	}
 	
 	restore_context();

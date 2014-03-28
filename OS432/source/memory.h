@@ -31,7 +31,7 @@ struct heap_node
 typedef struct heap_node heap;
 
 /**
- * The kernel heap. Must be initalized.
+ * The kernel heap. Must be initialized.
  */
 heap kernel_heap;
 
