@@ -33,7 +33,16 @@ This is the default process that will be started once the pi is powered on.
 Console Process:
 Process to handle keybopard input for kernel. currently quite complicated.
 
+Scheduling Processes:
+The scheduler is currently a very simple implementation
+it takes the list of processes, puts the first process on the back of the list
+and restores the context of the new first process
 
+Restoring Context:
+writen in assemply
+essentially pops the entries off of the process' stack in the reverse order 
+they were pushed, into the corresponding registers which will allow the 
+process to continue where it was interrupted
 
 
 
