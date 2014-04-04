@@ -30,7 +30,7 @@
 #define MAX_IO_STRING_SIZE 256
 
 /* Number of lines to leave when contents of the screen must be moved up. */
-#define REFRESH_LINE 20
+#define REFRESH_LINE 10
 
 /**
  * Initialize the input device (keyboard).

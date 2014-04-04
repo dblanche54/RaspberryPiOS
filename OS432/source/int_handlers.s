@@ -9,28 +9,6 @@
 	.eabi_attribute 30, 6
 	.eabi_attribute 18, 4
 	.file	"int_handlers.c"
-	.global	syscall_functions
-	.data
-	.align	2
-	.type	syscall_functions, %object
-	.size	syscall_functions, 64
-syscall_functions:
-	.word	internal_dummy_syscall
-	.word	internal_malloc
-	.word	internal_free
-	.word	internal_send
-	.word	internal_get_reply
-	.word	internal_wait_for_send
-	.word	internal_receive
-	.word	internal_reply
-	.word	internal_getpid
-	.word	internal_getppid
-	.word	internal_create_process
-	.word	internal_waitpid
-	.word	internal_exit
-	.word	internal_sleep
-	.word	internal_yield
-	.word	internal_gettime
 	.text
 	.align	2
 	.global	idt_init
@@ -45,8 +23,6 @@ idt_init:
 	mov	r3, #32768
 	add	r3, r3, #44
 	str	r3, [fp, #-12]
-	mov	r3, #0
-	str	r3, [fp, #-8]
 	mov	r3, #0
 	str	r3, [fp, #-8]
 	b	.L2
@@ -119,8 +95,8 @@ svc_handler:
 	mov r0, sp 
 	mov r1, lr 
 	mov sp, r5 
-	mov r5, r0 
-	mov r4, r1 
+	mov r4, r0 
+	mov r5, r1 
 	
 	stmfd	sp!, {r4, fp, lr}
 	add	fp, sp, #8
@@ -129,10 +105,9 @@ svc_handler:
 	ldr	r0, [r3, #0]
 	ldr	r3, .L7
 	ldr	r1, [r3, #0]
-	
 @ 0 "" 2
-	str	r5, [r0, #8]
-	str	r4, [r1, #12]
+	str	r4, [r0, #8]
+	str	r5, [r1, #12]
 	ldr	r3, .L7
 	ldr	r3, [r3, #0]
 	ldr	r3, [r3, #8]
@@ -246,7 +221,7 @@ svc_handler:
 	.type	irq_handler, %function
 irq_handler:
 	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 32
+	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 1, uses_anonymous_args = 0
 @ 51 "int_handlers.c" 1
 	mov sp, #32768 
@@ -284,121 +259,38 @@ irq_handler:
 	mov r0, sp 
 	mov r1, lr 
 	mov sp, r5 
-	mov r5, r0 
-	mov r4, r1 
+	mov r4, r0 
+	mov r5, r1 
 	
-	stmfd	sp!, {r4, fp, lr}
-	add	fp, sp, #8
-	sub	sp, sp, #36
-	ldr	r3, .L19
+	stmfd	sp!, {fp, lr}
+	add	fp, sp, #4
+	ldr	r3, .L11
 	ldr	r0, [r3, #0]
-	ldr	r3, .L19
+	ldr	r3, .L11
 	ldr	r1, [r3, #0]
-	
 @ 0 "" 2
-	str	r5, [r0, #8]
-	str	r4, [r1, #12]
-	bl	disableTimer
-	ldr	r3, .L19
+	str	r4, [r0, #8]
+	str	r5, [r1, #12]
+	ldr	r3, .L11
 	ldr	r2, [r3, #0]
-	ldr	r3, .L19
+	ldr	r3, .L11
 	ldr	r3, [r3, #0]
 	ldr	r3, [r3, #12]
 	sub	r3, r3, #4
 	str	r3, [r2, #12]
-	bl	GetTimeStamp
-	mov	r3, r0
-	mov	r4, r1
-	str	r3, [fp, #-36]
-	str	r4, [fp, #-32]
-	mov	r3, #0
-	str	r3, [fp, #-24]
-	ldr	r3, .L19+4
-	ldr	r3, [r3, #0]
-	str	r3, [fp, #-20]
-	b	.L10
-.L16:
-	ldr	r3, [fp, #-20]
-	ldr	r3, [r3, #0]
-	add	r2, r3, #72
-	ldmia	r2, {r1-r2}
-	str	r1, [fp, #-44]
-	str	r2, [fp, #-40]
-	ldr	r3, [fp, #-32]
-	ldr	r2, [fp, #-40]
-	cmp	r3, r2
-	bcc	.L11
-	ldr	r3, [fp, #-32]
-	ldr	r1, [fp, #-40]
-	cmp	r3, r1
-	bne	.L18
-	ldr	r3, [fp, #-36]
-	ldr	r2, [fp, #-44]
-	cmp	r3, r2
-	bcc	.L11
-	ldr	r3, [fp, #-36]
-	ldr	r1, [fp, #-44]
-	cmp	r3, r1
-.L18:
-	ldr	r3, [fp, #-20]
-	ldr	r2, [r3, #0]
-	mov	r3, #0
-	strb	r3, [r2, #32]
-	ldr	r3, [fp, #-24]
-	cmp	r3, #0
-	bne	.L13
-	ldr	r3, [fp, #-20]
-	ldr	r2, [r3, #4]
-	ldr	r3, .L19+4
-	str	r2, [r3, #0]
-	b	.L14
-.L13:
-	ldr	r3, [fp, #-20]
-	ldr	r2, [r3, #4]
-	ldr	r3, [fp, #-24]
-	str	r2, [r3, #4]
-.L14:
-	ldr	r3, [fp, #-20]
-	ldr	r3, [r3, #4]
-	cmp	r3, #0
-	bne	.L15
-	ldr	r2, .L19+4
-	ldr	r3, [fp, #-24]
-	str	r3, [r2, #4]
-.L15:
-	ldr	r3, [fp, #-20]
-	str	r3, [fp, #-16]
-	ldr	r3, [fp, #-20]
-	ldr	r3, [r3, #4]
-	str	r3, [fp, #-20]
-	ldr	r0, [fp, #-16]
-	bl	kfree
-	b	.L10
-.L11:
-	ldr	r3, [fp, #-20]
-	str	r3, [fp, #-24]
-	ldr	r3, [fp, #-20]
-	ldr	r3, [r3, #4]
-	str	r3, [fp, #-20]
-.L10:
-	ldr	r3, [fp, #-20]
-	cmp	r3, #0
-	bne	.L16
-	bl	ackTimerInterrupt
-	bl	enableTimer
 	bl	schedule
-	sub	sp, fp, #8
-	ldmfd	sp!, {r4, fp, lr}
+	sub	sp, fp, #4
+	ldmfd	sp!, {fp, lr}
 	bx	lr
-.L20:
+.L12:
 	.align	2
-.L19:
+.L11:
 	.word	current
-	.word	sleeping
 	.size	irq_handler, .-irq_handler
 	.comm	kernel_heap,12,4
 	.comm	kernel_stack,4,4
 	.comm	current,4,4
 	.comm	processes,8,4
 	.comm	sleeping,8,4
+	.comm	syscall_functions,64,4
 	.ident	"GCC: (Sourcery G++ Lite 2008q3-66) 4.3.2"
