@@ -29,9 +29,16 @@ Process Structure:
 
 Master Process:
 This is the default process that will be started once the pi is powered on.
+It is currently acting as a sort of "shell" for the operating system.
+It sends a promp to the console, then requests the next line input.
+it uses this line as a command and if it is defined creates a process according
+to that command.
 
 Console Process:
-Process to handle keybopard input for kernel. currently quite complicated.
+recieves messages from other processes, and performs IO tasks for them.
+if it is a print request it will print the string onto the screen, if it is a 
+read request, it will get a line of keyboard input and send the line to the 
+process.
 
 Scheduling Processes:
 The scheduler is currently a very simple implementation
