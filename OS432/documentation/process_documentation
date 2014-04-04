@@ -1,0 +1,39 @@
+Process Documentation
+Jeseph Hinz
+
+Creating a process
+
+1.gets a free pid
+2.initializers program counter (for a general process it will launch the
+  new_process() function, which will jump to the the function pointer defined 
+  in register r6 the next time the process is scheduled
+3.initializes heap
+4.initializes stack
+5.adds to list of callers children
+6.adds to list of current processes
+
+Process Structure:
+
+	pid: process id = 1
+	ppid: process id of parent = 0
+	program_counter: address of next line of code to execute
+	process_heap: data memory for this process
+	  address: adderss of start location
+	  size: definition of lingth of heap
+	  next: currently NULL
+	process_space_base: same as heap address for
+	stack_pointer: address of top of stack 
+	state: current state of process, starts as active
+	children: list of child processes
+	message_queue: list of messages
+
+Master Process:
+This is the default process that will be started once the pi is powered on.
+
+Console Process:
+Process to handle keybopard input for kernel. currently quite complicated.
+
+
+
+
+
