@@ -8,13 +8,13 @@
 #include "memory.h"
 #include "process.h"
 #include "scheduler.h"
+#include "tostring.h"
+#include "print.h"
 
 #define NULL ((void*) 0)
 
-int debug = 0;
-
 /* Note: memory must be initialized before processes.
- * Processes can be initialized last. */
+ * Processes must be initialized last. This function does not return. */
 void processes_init()
 {
 	struct process_node* node;
@@ -66,6 +66,8 @@ void processes_init()
 	node->next = NULL;
 	processes.head->next = node;
 	processes.tail = node;
+	sleeping.head = NULL;
+	sleeping.tail = NULL;
 	
 	/* The master process will now take control. */
 	schedule();
@@ -74,7 +76,7 @@ void processes_init()
 struct process* get_by_pid(unsigned int pid)
 {
 	struct process_node* node = processes.head;
-	while(node != NULL || node->proc->pid != pid)
+	while(node != NULL && node->proc->pid != pid)
 	{
 		node = node->next;
 	}

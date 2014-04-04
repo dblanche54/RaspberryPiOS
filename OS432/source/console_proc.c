@@ -9,26 +9,34 @@
 
 #include "console_proc.h"
 #include "io_config.h"
+#include "leds.h"
 #include "memcpy.h"
 #include "print.h"
 #include "user_syscalls.h"
+#include "tostring.h"
 
 /* Where to start copying. */
 #define START_COPY_ADDRESS (void*) \
 	(((unsigned int) framebuffer) \
-		+ H_RESOLUTION * REFRESH_LINE * V_CHAR * BITS_PER_PIXEL)
+		+ H_RESOLUTION * (V_SCREEN_CHARS - REFRESH_LINE) * V_CHAR \
+		* BITS_PER_PIXEL / 8)
+/* Where to start clearing. */
+#define START_CLEAR_ADDRESS (void*) \
+	(((unsigned int) framebuffer) \
+		+ H_RESOLUTION * REFRESH_LINE * V_CHAR * BITS_PER_PIXEL / 8)
 /* How much to clear. */
 #define CLEAR_AMOUNT H_RESOLUTION * (V_SCREEN_CHARS - REFRESH_LINE) * V_CHAR \
-	* BITS_PER_PIXEL / sizeof(unsigned int)
+	* BITS_PER_PIXEL / 8 / sizeof(unsigned int)
 /* How much to copy. */
-#define COPY_AMOUNT H_RESOLUTION * REFRESH_LINE * V_CHAR * BITS_PER_PIXEL
+#define COPY_AMOUNT H_RESOLUTION * REFRESH_LINE * V_CHAR * BITS_PER_PIXEL / 8
 
 /**
  * Move the contents of the screen up.
  */
 void move_screen_up()
 {
-	unsigned int* temp = (int*) START_COPY_ADDRESS;
+	ledon();
+	unsigned int* temp = (unsigned int*) START_CLEAR_ADDRESS;
 	int i;
 	
 	memcpy(framebuffer, START_COPY_ADDRESS, COPY_AMOUNT);
@@ -36,10 +44,9 @@ void move_screen_up()
 	{
 		temp[i] = 0;
 	}
-}
 
-char debug000[] = "CONSOLE";
-char debug001[] = "HERE0";
+	ledoff();
+}
 
 void console_proc()
 {
@@ -50,18 +57,20 @@ void console_proc()
 	unsigned int status;
 	unsigned int size;
 	char* string;
+	char s0[] = "DONE CLEARING";
+	char s1[] = "HERE";
+	int y = 0;
 	
 	unsigned int pid;
 	struct io_request data;
-	DrawString(debug000, 7, 100, 100);
 	
 	while(1)
 	{
+		DrawString(s1, 4, 600, y);
+		y = y + 1;
 		size = sizeof(struct io_request);
-		DrawString(debug001, 5, 180, 100);
 		status = osc_receive(&pid, &data, &size);
 		
-		DrawString(debug001, 5, 180, 116);
 		if(status == 0)
 		{
 			switch(data.type)
@@ -90,7 +99,7 @@ void console_proc()
 						}
 						
 						DrawString(string, numPrinted, cursorX * H_CHAR,
-							cursorY * H_CHAR);
+							cursorY * V_CHAR);
 						
 						cursorX = cursorX + numPrinted;
 						if(cursorX == H_SCREEN_CHARS)
@@ -110,9 +119,13 @@ void console_proc()
 					
 					if(data.type == OUTPUT_LN)
 					{
+						cursorX = 0;
+						cursorY = cursorY + 1;
 						if(cursorY == V_SCREEN_CHARS)
 						{
+							DrawString(s0, 13, 200, 600);
 							move_screen_up();
+							DrawString(s0, 13, 200, 0);
 							cursorY = REFRESH_LINE;
 						}
 					}

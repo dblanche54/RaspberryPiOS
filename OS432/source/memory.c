@@ -67,7 +67,10 @@ void* memory_allocator(heap* h, unsigned int size)
 		}
 	}
 	
-	address = (void*) (((char*) address) + sizeof(unsigned int));
+	if(address != NULL)
+	{
+		address = (void*) (((char*) address) + sizeof(unsigned int));
+	}
 	return address;
 }
 

@@ -18,7 +18,7 @@
 void idt_init()
 {
 	unsigned int* address = (unsigned int*) 0x802C;
-	int i = 0;
+	int i;
 	for(i = 0; i < 7; i++)
 	{
 		address[i] = 0x8048 + i * 4;
@@ -49,51 +49,8 @@ void svc_handler()
 void irq_handler()
 {
 	save_context();
-	
-	disableTimer();
-	
 	current->program_counter =
 		(void*) (((unsigned int) current->program_counter) - 4);
-	
-	/* Wake up any sleeping processes that should be done sleeping. */
-	unsigned long long current_time = GetTimeStamp();
-	struct process_node* prev = NULL;
-	struct process_node* node = sleeping.head;
-	while(node != NULL)
-	{
-		if(node->proc->wakeup_time <= current_time)
-		{
-			struct process_node* temp;
-			node->proc->state = ACTIVE;
-			
-			/* Remove the node from the sleeping list. */
-			if(prev == NULL)
-			{
-				sleeping.head = node->next;
-			}
-			else
-			{
-				prev->next = node->next;
-			}
-			if(node->next == NULL)
-			{
-				sleeping.tail = prev;
-			}
-			
-			temp = node;
-			node = node->next;
-			kfree(temp);
-		}
-		else
-		{
-			prev = node;
-			node = node->next;
-		}
-	}
-	
-	/* Set up the timer once again. */
-	ackTimerInterrupt();
-	enableTimer();
 	
 	schedule();
 }
