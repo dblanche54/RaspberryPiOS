@@ -78,7 +78,8 @@ loads the value into the timer
 enables the timer
 
 processes_init:
-creates the structs and fills in the fields for the master and consol processes
-then calls schedule to allow the master process to take control
+creates the structs and fills in the fields for the master and consol 
+processesthen calls schedule to allow the master process to take 
+control
 
 bootloader is now finished
