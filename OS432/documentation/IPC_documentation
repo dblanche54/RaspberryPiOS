@@ -1,1 +1,40 @@
 IPC documentation
+
+Implementations of system calles related to IPC are as follows:
+
+
+The Send Function, which also can recieve
+	unsigned long long internal_send(unsigned int a0, unsigned int a1,
+		unsigned int a2, unsigned int a3, unsigned int a4)
+	Parameters used are a0, a1, a2, a3,
+
+The Get Reply from Sender Function
+	unsigned long long internal_get_reply(unsigned int a0, unsigned int a1,
+		unsigned int a2, unsigned int a3, unsigned int a4)
+	Parameters used are a0, a1, a2,
+
+The Wait For Sender Function
+	unsigned long long internal_wait_for_send(unsigned int a0, unsigned int a1,
+		unsigned int a2, unsigned int a3, unsigned int a4)
+	No Parameters are used in this function.
+	
+The Recieve Function
+	unsigned long long internal_receive(unsigned int a0, unsigned int a1,
+		unsigned int a2, unsigned int a3, unsigned int a4)
+	Parameters used are a0, a1, a2.
+
+The Reply Function
+	unsigned long long internal_reply(unsigned int a0, unsigned int a1,
+		unsigned int a2, unsigned int a3, unsigned int a4)
+	Parameters used are a0, a1, a2/
+	
+The parameters are only used when necessary, if they are unneeded they are
+unused in their respective function. The Parameters are as follows:
+	a0 is the PID of the target process
+	a1 is the pointer to the data to send
+	a2 is the size of the message
+	a3 defines if the funciton will block until a reply has been given
+		(if 1 then block, else don't block)
+	a4 is currently unused by all functions.
+
+
