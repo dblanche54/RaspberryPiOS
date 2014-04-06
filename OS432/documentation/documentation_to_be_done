@@ -6,6 +6,5 @@ syscalls handler
 
 documentation to be done:
 IO
-IPC
 syscall implementations
 memory management
