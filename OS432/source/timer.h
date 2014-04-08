@@ -1,4 +1,9 @@
-/* Methods relating to the system timer */
+/*
+ * Methods relating to the system timer
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
+*/
 
 #ifndef _TIMER_H_
 #define _TIMER_H_

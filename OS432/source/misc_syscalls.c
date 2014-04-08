@@ -1,8 +1,8 @@
-/**
+/*
  * This file contains implementations of miscellanous system calls.
  * 
- * Author: Omar Zarifi
- * Date: March 26, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
  */
 
 #include "timer.h"

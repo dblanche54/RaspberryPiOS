@@ -1,11 +1,17 @@
-/**
+/*
  * The function executed by the console process.
  * The console processes has queues of operations that it needs to perform.
  * Operations are either input (keyboard) or output (monitor).
  * 
- * Author: Omar Zarifi
- * Date: March 4, 2014
- */
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
+
+/*
+ * WARNING: THIS PROCESSES IS NOT CURRENTLY BEING RUN OR USED FOR INPUT OR
+ * OUTPUT. THE FUNCTIONS CURRENTLY BEING USED ARE IN misc_syscalls.c. IDEALLY
+ * THIS PROCESS WOULD BE A BETTER WAY OF DOING IO.
+*/
 
 #include "console_proc.h"
 #include "io_config.h"

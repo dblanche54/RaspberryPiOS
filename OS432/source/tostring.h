@@ -1,4 +1,9 @@
-/* ToString methods used for printing */
+/* 
+ * ToString methods used for printing
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
+*/
 
 #ifndef _TOSTRING_H_
 #define _TOSTRING_H_

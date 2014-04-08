@@ -1,4 +1,9 @@
-/* ToString methods used for printing */
+/* 
+ * ToString methods used for printing
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #include "tostring.h"
 #include "memcpy.h"

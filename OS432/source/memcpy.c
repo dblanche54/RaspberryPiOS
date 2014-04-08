@@ -1,3 +1,10 @@
+/* 
+ * A simple memory copy routine
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
+
 void* memcpy(void* dest, const void* source, unsigned int size)
 {
 	unsigned int i;

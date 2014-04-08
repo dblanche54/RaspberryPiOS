@@ -1,8 +1,9 @@
 /**
  * This file contains the context saving and restoring functionality.
  * 
- * Author: Omar Zarifi
- * Date: March 17, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+ *
  */
 
 #ifndef _CPU_CONTEXT_H_

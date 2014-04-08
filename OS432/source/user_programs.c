@@ -1,3 +1,12 @@
+/*
+ * This file contains basic user programs used for testing the OS
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
+ *
+*/
+
+
 #include "user_programs.h"
 #include "tostring.h"
 

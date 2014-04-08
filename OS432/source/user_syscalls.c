@@ -1,9 +1,9 @@
-/**
- * This file contains system calls.
- * 
- * Author: Omar Zarifi
- * Date: March 26, 2014
- */
+/*
+ * This file contains system calls
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #include "console_proc.h"
 #include "memcpy.h"

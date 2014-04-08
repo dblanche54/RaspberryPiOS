@@ -1,8 +1,8 @@
 /**
  * Input/output initialization routines.
  * 
- * Author: Omar Zarifi
- * Date: March 24, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
  */
 
 #include "io_config.h"

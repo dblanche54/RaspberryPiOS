@@ -1,4 +1,9 @@
-/* A file containing string related functions */
+/*
+ *  A file containing string related functions
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
+*/
 
 int strcmp(const char* string1, const char* string2)
 {

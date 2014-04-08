@@ -1,8 +1,8 @@
-/**
+/*
  * This file contains the scheduling and context switching facility.
  * 
- * Author: Omar Zarifi
- * Date: March 14, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
  */
 
 #include "cpu_context.h"

@@ -2,8 +2,8 @@
  * This file contains implementations of system calls related to inter-process
  * communication.
  * 
- * Author: Omar Zarifi
- * Date: March 26, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
  */
 
 #include "ipc_facility.h"

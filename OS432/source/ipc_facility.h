@@ -1,8 +1,8 @@
 /**
  * IPC facility data structures.
  * 
- * Author: Omar Zarifi
- * Date: March 11, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
  */
 
 #ifndef _IPC_FACILITY_H_

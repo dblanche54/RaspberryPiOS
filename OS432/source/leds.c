@@ -1,4 +1,9 @@
-/* Methods to manipulate the pi's LED's */
+/* 
+ * Methods to manipulate the pi's LED's
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #include "timer.h"
 #include "leds.h"
