@@ -1,8 +1,9 @@
-/**
+/*
  * This file contains the kernel memory management facility.
- * 
- * Author: Omar Zarifi
- * Date: March 7, 2014
+ *  
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew    
+ *
  */
 
 #include "memory.h"

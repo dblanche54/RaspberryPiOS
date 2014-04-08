@@ -1,9 +1,9 @@
-/**
+/*
  * Prototypes for system calls available to be called by a user program.
  * 
- * Author: Omar Zarifi
- * Date: March 4, 2014
- */
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #ifndef _USER_SYSCALLS_H_
 #define _USER_SYSCALLS_H_
@@ -66,13 +66,15 @@ void osc_yield();
  *****************************************************************************/
 
 /* Print the given string at the cursor position. Size of the string must also
- * be provided. */
+ * be provided. USES CONSOLE PROCCESS, NOT CURRENTLY WORKING */
 void osc_print_string(char* string, unsigned int size);
 /* Print the given string at the cursor position, followed by a new line. Size
- * of the string (without the new line) must also be provided. */
+ * of the string (without the new line) must also be provided.
+ * USES CONSOLE PROCCESS, NOT CURRENTLY WORKING  */
 void osc_print_line(char* string, unsigned int size);
 /* Get a string from the keyboard. Maximum size of the string must also be
- * provided. Size will contain the actual number of characters read. */
+ * provided. Size will contain the actual number of characters read.
+ * USES CONSOLE PROCCESS, NOT CURRENTLY WORKING */
 void osc_get_string(char* string, unsigned int* size);
 
 /* Prints a string to the screen on the current line */
@@ -81,7 +83,8 @@ void osc_drawstring(void *string, unsigned int length);
 /* Prints a string to the screen on its own line */
 void osc_drawstringln(void *string, unsigned int length);
 
-/* Gets a string from the keyboard */
+/* Gets a string from the keyboard (Will block all processes until finished, 
+ * obviously this isn't ideal) */
 void osc_getstring(char *string, unsigned int maxlength, unsigned int *lengthread);
 
 /* Draws a line on the screen */

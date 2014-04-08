@@ -1,3 +1,11 @@
+/*
+ * This file contains basic user programs used for testing the OS
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew   
+ *
+*/
+
 #ifndef USER_PROGRAMS_H
 #define USER_PROGRAMS_H
 

@@ -1,6 +1,8 @@
-/**
+/*
  * Function executed by the first process.
- */
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #include "tostring.h"
 #include "user_syscalls.h"

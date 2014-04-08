@@ -1,4 +1,9 @@
-/* Methods related to printing to the screen */
+/* 
+ * Methods related to printing to the screen
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
+*/
 
 #ifndef _PRINT_H_
 #define _PRINT_H_

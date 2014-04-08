@@ -1,4 +1,9 @@
-/* Memory (kmalloc & malloc) testing function */
+/* 
+ * Memory (kmalloc & malloc) testing function
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
+*/
 
 int memtest(void){
 	char* outMessage = "Memory Test Running";

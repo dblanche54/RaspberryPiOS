@@ -2,8 +2,8 @@
  * Input/output configuration.
  * Note: H - horizontal, V - vertical.
  * 
- * Author: Omar Zarifi
- * Date: March 4, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
  */
 
 #ifndef _IO_CONFIG_H_

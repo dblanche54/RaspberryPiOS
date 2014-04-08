@@ -1,8 +1,8 @@
-/**
+/*
  * This file contains the process-related routines.
  * 
- * Author: Omar Zarifi
- * Date: March 11, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
  */
 
 #include "memory.h"

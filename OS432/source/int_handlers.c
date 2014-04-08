@@ -1,8 +1,8 @@
-/**
+/*
  * This file contains interrupt handler functions.
  * 
- * Author: Omar Zarifi
- * Date: March 19, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
  */
 
 #include "cpu_context.h"

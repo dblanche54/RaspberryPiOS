@@ -1,4 +1,9 @@
-/* Main C method, jumped to from init.s */
+/* 
+ * Main C method, jumped to from init.s
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #include "int_handlers.h"
 #include "io_config.h"

@@ -1,11 +1,15 @@
-/* This code jumps to main */
-
 .section .init
 .globl _start
 _start:
 
-/*
-* Branch to the main function defined in main.c.
+/* 
+ * This code jumps to initalize() in main.c
+ * It also contains the instructions that are used in the interrupt description
+ * table that is placed at the beginning of memory. Along with other
+ * instructions needed for process creation and general initalization
+ * 
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
 */
 
 mov sp, #0x8000			/* 0x8000 */

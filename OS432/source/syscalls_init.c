@@ -1,8 +1,8 @@
-/**
+/*
  * This file contains initialization for the array of syscall functions.
  * 
- * Author: Omar Zarifi
- * Date: March 28, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
  */
 
 #include "syscalls.h"

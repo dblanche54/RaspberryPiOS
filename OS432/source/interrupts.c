@@ -1,4 +1,9 @@
-/* Code to set up clock interrupts */
+/*
+ *  Code to set up clock interrupts
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #include "interrupts.h"
 

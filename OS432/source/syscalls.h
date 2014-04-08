@@ -1,8 +1,8 @@
-/**
+/*
  * This file contains internal syscall definitions.
  * 
- * Author: Omar Zarifi
- * Date: March 25, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
  */
 
 #ifndef _SYSCALLS_H_

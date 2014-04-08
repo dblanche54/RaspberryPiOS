@@ -1,4 +1,9 @@
-/* Method to manipulate the pi's LED's */
+/* 
+ * Methods to manipulate the pi's LED's
+ *
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #ifndef _LEDS_H_
 #define _LEDS_H_

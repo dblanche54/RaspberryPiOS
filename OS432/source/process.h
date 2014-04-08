@@ -1,9 +1,9 @@
-/**
+/*
  * This file contains the description of a process, as well as the system
  * process management routines and structures.
  * 
- * Author: Omar Zarifi
- * Date: March 11, 2014
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew 
  */
 
 #ifndef _PROCESS_H_

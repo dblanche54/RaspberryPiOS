@@ -1,4 +1,8 @@
-/* Code to enable clock interrupts */
+/* 
+ * Code to enable clock interrupts
+ * CMPT 432: Operating Systems
+ * Group: Omar, Chris, Chad, Joseph, Matthew
+*/
 
 #ifndef _INTERRUPTS_H_
 #define _INTERRUPTS_H_
