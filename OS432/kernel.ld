@@ -1,6 +1,7 @@
 /******************************************************************************
 *	kernel.ld
 *	 by Alex Chadwick
+*	 with modifications by Omar, Chris, Chad, Joseph, Matthew from CMPT432
 *
 *	A linker script for generation of raspberry pi kernel images.
 ******************************************************************************/
@@ -28,12 +29,4 @@ SECTIONS {
 	.data : {
 		*(.data)
 	}
-
-	/*
-	* Finally comes everything else. A fun trick here is to put all other 
-	* sections into this section, which will be discarded by default.
-	*/
-/*	/DISCARD/ : {
-		*(*)
-	}*/
 }

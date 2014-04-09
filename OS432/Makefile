@@ -1,6 +1,7 @@
 ###############################################################################
-#	makefile
-#	 by Alex Chadwick
+#	Makefile by Alex Chadwick
+#	with significant additions by:
+#	Omar, Chris, Chad, Joseph, Matthew in CMPT 432 
 #
 #	A makefile script for generation of raspberry pi kernel images.
 ###############################################################################

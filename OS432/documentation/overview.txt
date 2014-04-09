@@ -3,8 +3,8 @@ Our critical path:
 We wanted to make sure that we had an operating system that could make user
 processes, schedule these processes in some manner, output something to the
 screen, and take some kind of user input. In order to achieve this we needed
-basic memory management, context switching, and some kind of clock interrupt,
-interrupt handling, and SVC handling (for syscalls).
+basic memory management, context switching, a clock interrupt, interrupt
+handling, and SVC handling (for syscalls).
 
 What would be nice to have:
 
